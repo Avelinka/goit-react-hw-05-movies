@@ -1,35 +1,34 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import { fetchMovieByQuery } from '../components/Helper/api';
 
 import { Loader } from '../components/Loader/Loader';
 import { MoviesGallery } from '../components/MoviesGallery/MoviesGallery';
-import Searchbar from '../components/Searchbar/Searchbar';
+import { Searchbar } from '../components/Searchbar/Searchbar';
 
 export default function SearchMoviePage() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [query, setQuery] = useState('');
+  const [params, setParams] = useSearchParams();
+  const query = params.get('query') ?? '';
 
   useEffect(() => {
-    if (query === '') {
-      return;
-    }
-
+    if (!query) return;
     async function getMovieByQuery() {
       try {
         setIsLoading(true);
 
-        const movies = await fetchMovieByQuery(query);
-
-        if (movies.lenght === 0) {
+        const newMovies = await fetchMovieByQuery(query);
+        console.log(newMovies);
+        if (newMovies.total_results === 0) {
           toast.error(
             'Sorry, there are no movies matching your search query. Please try again.'
           );
           return;
         }
-        setMovies(movies);
+        setMovies(newMovies.results);
       } catch (error) {
         toast.error('Oops! Something went wrong. Please try again later.');
       } finally {
@@ -40,19 +39,24 @@ export default function SearchMoviePage() {
     getMovieByQuery();
   }, [query]);
 
-  const addQuery = searchQuery => {
-    if (searchQuery === query) {
+  const getQuery = newQuery => {
+    if (newQuery === '') {
+      toast('Please enter movie title for search', {
+        icon: '📝',
+      });
       return;
     }
-    setQuery(searchQuery);
+    params.set('query', newQuery);
+    setMovies([]);
+    setParams(params);
   };
 
   return (
     <>
-      <Searchbar addQuery={addQuery} />
+      <Searchbar onSubmit={getQuery} />
       {movies.length > 0 && <MoviesGallery movies={movies} />}
       {isLoading && <Loader />}
-      {!isLoading && movies.length > 0 && <MoviesGallery movies={movies} />}
+      {movies.length > 0 && <MoviesGallery movies={movies} />}
     </>
   );
 }

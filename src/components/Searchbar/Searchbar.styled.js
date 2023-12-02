@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Form as FormikForm, Field as FormikField } from 'formik';
 
-export const Form = styled(FormikForm)`
+export const Form = styled.form`
   display: flex;
   align-items: center;
   width: 100%;
@@ -12,7 +11,7 @@ export const Form = styled(FormikForm)`
   margin: 0 auto ${p => p.theme.spacing(10)};
 `;
 
-export const Field = styled(FormikField)`
+export const Field = styled.input`
   display: block;
   width: 480px;
   height: 100%;

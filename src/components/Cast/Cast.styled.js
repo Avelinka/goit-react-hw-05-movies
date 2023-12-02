@@ -26,7 +26,7 @@ export const CastPhoto = styled.img`
 
 export const CastInfoBox = styled.div`
   width: 100%;
-  height: 120px;
+  height: 140px;
   padding: ${p => p.theme.spacing(4)};
 `;
 export const CastInfoTitle = styled.h3`

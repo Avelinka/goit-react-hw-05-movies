@@ -9,7 +9,7 @@ export const ReviewsList = styled.ul`
 export const ReviewsItem = styled.li`
   padding: ${p => p.theme.spacing(5)};
   border-radius: ${p => p.theme.radii.lg};
-  background-color: ${p => p.theme.colors.lightblue};
+  background-color: ${p => p.theme.colors.white};
 `;
 
 export const ReviewsAutor = styled.h3`
