@@ -54,9 +54,8 @@ export default function SearchMoviePage() {
   return (
     <>
       <Searchbar onSubmit={getQuery} />
-      {movies.length > 0 && <MoviesGallery movies={movies} />}
+      {!isLoading && movies.length > 0 && <MoviesGallery movies={movies} />}
       {isLoading && <Loader />}
-      {movies.length > 0 && <MoviesGallery movies={movies} />}
     </>
   );
 }

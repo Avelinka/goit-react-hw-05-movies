@@ -5,7 +5,7 @@ export const MovieListItem = styled.li`
   max-width: 300px;
   width: 100%;
   height: 500px;
-  background-color: ${p => p.theme.colors.lightblue};
+  background-color: ${p => p.theme.colors.white};
   color: ${p => p.theme.colors.gray};
   border-radius: ${p => p.theme.radii.md};
   overflow: hidden;

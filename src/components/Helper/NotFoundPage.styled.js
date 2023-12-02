@@ -9,7 +9,6 @@ export const NotFoundBox = styled.div`
   gap: ${p => p.theme.spacing(5)};
   justify-content: center;
   align-items: center;
-  /* margin: 0 auto; */
 `;
 
 export const NotFoundImg = styled.img`
