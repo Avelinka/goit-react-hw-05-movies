@@ -16,18 +16,20 @@ export default function SearchMoviePage() {
 
   useEffect(() => {
     if (!query) return;
+
     async function getMovieByQuery() {
       try {
         setIsLoading(true);
 
         const newMovies = await fetchMovieByQuery(query);
-        console.log(newMovies);
+
         if (newMovies.total_results === 0) {
           toast.error(
             'Sorry, there are no movies matching your search query. Please try again.'
           );
           return;
         }
+
         setMovies(newMovies.results);
       } catch (error) {
         toast.error('Oops! Something went wrong. Please try again later.');
